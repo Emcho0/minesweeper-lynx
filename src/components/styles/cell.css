@@ -3,16 +3,20 @@
   height: 35px;
   border: 1px solid #343742;
   display: flex;
+  background-color: #798bbc;
   border-radius: 5px;
   align-items: center;
   justify-content: center;
 }
 
 .cell--flipped {
-  background-color: lightblue;
+  background-color: #597bc0;
+  border: 1px solid white;
 }
 
 .cell__text {
   font-size: 22px;
-  font-weight: 800;
+
+  color: #c6dfec;
+  font-weight: 500;
 }

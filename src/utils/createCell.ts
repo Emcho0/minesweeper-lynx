@@ -1,3 +1,4 @@
+// definisanje tipa Celije
 export interface Cell {
   row: number;
   col: number;
@@ -5,7 +6,7 @@ export interface Cell {
   isFlipped: boolean;
   value: number;
 }
-
+// funkcija koja vraca kolonu i red celije i osobine celije
 export function createCell(row: number, col: number): Cell {
   return {
     row,

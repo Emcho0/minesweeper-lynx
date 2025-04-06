@@ -36,7 +36,6 @@ export function getNeighbors(
   const width = matrix[0].length;
   const neighbors: [number, number][] = [];
 
-  // Use a nested loop to handle all eight directions.
   for (let dr = -1; dr <= 1; dr++) {
     for (let dc = -1; dc <= 1; dc++) {
       if (dr === 0 && dc === 0) continue; // Skip the cell itself.
@@ -60,16 +59,13 @@ function insertBombs(matrix: Cell[][], bombs: number): void {
     throw new Error("Bomb count exceeds board size");
   }
 
-  // Create an array with all possible cell indices.
   const positions = Array.from({ length: totalCells }, (_, i) => i);
 
-  // Shuffle the array using Fisher-Yates algorithm.
   for (let i = positions.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [positions[i], positions[j]] = [positions[j], positions[i]];
   }
 
-  // Place bombs at the first "bombs" shuffled positions.
   for (let i = 0; i < bombs; i++) {
     const pos = positions[i];
     const row = Math.floor(pos / width);

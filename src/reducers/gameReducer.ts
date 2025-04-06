@@ -2,13 +2,12 @@ import { getNeighbors } from "../utils/createBoard.js";
 import type { Cell } from "../utils/createCell.js";
 
 export interface GameState {
+  // osobine stanja igre
   board: Cell[][];
   isGameOver: boolean;
-  // add other properties as needed
 }
 
 export type GameAction = { type: "HANDLE_CELL"; row: number; col: number };
-// add additional action types as needed
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   const { type, row, col } = action;
@@ -23,7 +22,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
           isGameOver: true,
         };
       } else if (cell.value === 0) {
-        // expand the area by revealing adjacent cells.
         return {
           ...state,
           board: expand(row, col, state.board),
@@ -42,12 +40,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
   }
 }
 
-// Helper: creates a deep copy of the board (each row is copied).
 function cloneBoard(board: Cell[][]): Cell[][] {
   return board.map((row) => row.slice());
 }
 
-// Flips a single cell.
 function flipCell(row: number, col: number, board: Cell[][]): Cell[][] {
   const newBoard = cloneBoard(board);
   const cell = newBoard[row][col];
@@ -55,7 +51,6 @@ function flipCell(row: number, col: number, board: Cell[][]): Cell[][] {
   return newBoard;
 }
 
-// Expands the revealed area for cells with no adjacent bombs.
 function expand(startRow: number, startCol: number, board: Cell[][]): Cell[][] {
   const newBoard = cloneBoard(board);
   const stack: [number, number][] = [[startRow, startCol]];
@@ -78,7 +73,6 @@ function expand(startRow: number, startCol: number, board: Cell[][]): Cell[][] {
   return newBoard;
 }
 
-// Flips all cells (used when the game is over).
 function flipAll(board: Cell[][]): Cell[][] {
   const newBoard = cloneBoard(board);
   for (let row = 0; row < newBoard.length; row++) {
@@ -90,7 +84,6 @@ function flipAll(board: Cell[][]): Cell[][] {
   return newBoard;
 }
 
-// Optional: counts the number of cells that are flipped.
 function numOfOpenCells(board: Cell[][]): number {
   let total = 0;
   for (let row = 0; row < board.length; row++) {
